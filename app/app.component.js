@@ -9,6 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var search_component_1 = require('./components/search/search.component');
+var about_component_1 = require('./components/about/about.component');
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -16,7 +18,9 @@ var AppComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'my-app',
-            templateUrl: 'app.component.html'
+            templateUrl: 'app.component.html',
+            //directives: [NavbarComponent]
+            entryComponents: [search_component_1.SearchComponent, about_component_1.AboutComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
