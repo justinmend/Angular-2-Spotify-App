@@ -9,23 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var search_component_1 = require('./components/search/search.component');
-var about_component_1 = require('./components/about/about.component');
-//import {HTTP_PROVIDERS} from '@angular/http';
-var AppComponent = (function () {
-    function AppComponent() {
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
+var SpotifyService = (function () {
+    function SpotifyService(_http) {
+        this._http = _http;
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'my-app',
-            templateUrl: 'app.component.html',
-            //directives: [NavbarComponent]
-            entryComponents: [search_component_1.SearchComponent, about_component_1.AboutComponent],
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    SpotifyService.prototype.searchMusic = function (str, type) {
+        if (type === void 0) { type = 'artist'; }
+        this.searchUrl = 'https://api.spotify.com/v1/search?query=' + str + '&offset=0&limit=20&type=' + type + '&market=US';
+        return this._http.get(this.searchUrl)
+            .map(function (res) { return res.json(); });
+    };
+    SpotifyService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], SpotifyService);
+    return SpotifyService;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.SpotifyService = SpotifyService;
+//# sourceMappingURL=spotify.service.js.map

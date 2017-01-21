@@ -9,17 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var spotify_service_1 = require('../../services/spotify.service');
 var SearchComponent = (function () {
-    function SearchComponent() {
-        this.name = 'Angular';
+    function SearchComponent(_spotifyService) {
+        this._spotifyService = _spotifyService;
     }
+    SearchComponent.prototype.searchMusic = function () {
+        this._spotifyService.searchMusic(this.searchStr)
+            .subscribe(function (res) {
+            console.log(res.artists.items);
+        });
+    };
     SearchComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'search',
             templateUrl: "search.component.html",
+            providers: [spotify_service_1.SpotifyService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [spotify_service_1.SpotifyService])
     ], SearchComponent);
     return SearchComponent;
 }());
